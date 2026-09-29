@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Método — Entrenamiento & Nutrición</title>
+  <meta name="description" content="Planes de entrenamiento y nutrición personalizados con Oliverio Scasso. Transforma tu cuerpo con asesoría profesional.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== CSS Custom Properties ===== */
+    :root {
+      --color-primary: #0a1f12;
+      --color-primary-light: #11361f;
+      --color-primary-glow: #0d8a43;
+      --color-bg-dark: #0a0a0a;
+      --color-bg-card: #111111;
+      --color-bg-card-hover: #1a1a1a;
+      --color-text-white: #ffffff;
+      --color-text-gray: #b0b0b0;
+      --color-text-muted: #888888;
+      --color-star: #f5c518;
+      --color-border: #122419;
+      --font-heading: 'Montserrat', Arial, Helvetica, sans-serif;
+      --font-body: 'Montserrat', Arial, Helvetica, sans-serif;
+      --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== Utility Classes ===== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--color-text-white);
+    }
+
+    .section-title span {
+      color: var(--color-primary-glow);
+    }
+
+    /* ===== Scroll Reveal Animations ===== */
+    @media (prefers-reduced-motion: no-preference) {
+      /* Native CSS scroll-driven animations for supported browsers */
+      @supports ((animation-timeline: view()) and (animation-range: entry)) {
+        @keyframes reveal-up {
+          from {
+            opacity: 0;
+            transform: translateY(60px);
+          }
+        }
+
+        .reveal {
+          animation: reveal-up auto linear backwards;
+          animation-timeline: view();
+          animation-range: entry 0% entry 40%;
+        }
+      }
+
+      /* Fallback class-based animation for all browsers */
+      .reveal-fallback {
+        opacity: 0;
+        transform: translateY(60px);
+        transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+      }
+
+      .reveal-fallback.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== Navigation ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 0;
+      transition: background var(--transition-smooth), box-shadow var(--transition-smooth);
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-white);
+    }
+
+    .nav-logo span {
+      color: var(--color-primary-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-gray);
+      transition: color var(--transition-smooth);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-primary-glow);
+      transition: width var(--transition-smooth);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text-white);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile menu toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--color-text-white);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ===== SECTION 1: Hero ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* Parallax layer */
+    .hero-bg-parallax {
+      position: absolute;
+      inset: -20% 0;
+      z-index: 0;
+      will-change: transform;
+    }
+
+    .hero-bg-parallax img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+
+    /* Dark overlays for readability */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.55) 50%,
+        rgba(0, 0, 0, 0.3) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-overlay-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--color-bg-dark), transparent);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 24px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-primary-glow);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeInUp 1s 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      line-height: 1.02;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--color-text-white);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeInUp 1s 0.5s forwards;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--color-primary-glow);
+      display: block;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 400;
+      color: var(--color-text-gray);
+      max-width: 520px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeInUp 1s 0.7s forwards;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 42px;
+      background: var(--color-primary);
+      color: var(--color-text-white);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 2px solid var(--color-primary-light);
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition-smooth), border-color var(--transition-smooth), transform 0.2s;
+      opacity: 0;
+      animation: fadeInUp 1s 0.9s forwards;
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(13, 138, 67, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary-glow);
+      transform: translateY(-2px);
+    }
+
+    .hero-cta:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .hero-cta-arrow {
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+
+    .hero-cta:hover .hero-cta-arrow {
+      transform: translateX(4px);
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeInUp 1s 1.2s forwards;
+    }
+
+    .hero-scroll-indicator span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--color-primary-glow), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== SECTION 2: Testimonials ===== */
+    .testimonials {
+      padding: 120px 0;
+      background: var(--color-bg-dark);
+      position: relative;
+    }
+
+    .testimonials::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--color-primary-glow), transparent);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .testimonial-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-glow));
+      opacity: 0;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(10, 31, 18, 0.4);
+      border-color: var(--color-primary-light);
+    }
+
+    .testimonial-card:hover::before {
+      opacity: 1;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-stars svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--color-star);
+    }
+
+    .testimonial-quote-icon {
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--color-primary);
+      font-family: Georgia, serif;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--color-text-gray);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-glow));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--color-text-white);
+      flex-shrink: 0;
+    }
+
+    .testimonial-author-info h4 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-text-white);
+    }
+
+    .testimonial-author-info p {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    /* ===== SECTION 3: Services ===== */
+    .services {
+      padding: 120px 0;
+      background: linear-gradient(to bottom, var(--color-bg-dark), #060606);
+      position: relative;
+    }
+
+    .services::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--color-primary-glow), transparent);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      cursor: pointer;
+      group: service;
+    }
+
+    .service-card-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .service-card-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--transition-smooth);
+    }
+
+    .service-card:hover .service-card-bg img {
+      transform: scale(1.08);
+    }
+
+    .service-card-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.3) 40%,
+        rgba(0, 0, 0, 0.15) 100%
+      );
+      transition: background var(--transition-smooth);
+    }
+
+    .service-card:hover .service-card-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(10, 31, 18, 0.9) 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        rgba(0, 0, 0, 0.3) 100%
+      );
+    }
+
+    .service-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .service-card-number {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 3.5rem;
+      color: var(--color-primary-glow);
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: 8px;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .service-card:hover .service-card-number {
+      opacity: 0.5;
+    }
+
+    .service-card-title {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-text-white);
+      margin-bottom: 12px;
+      transition: color var(--transition-smooth);
+    }
+
+    .service-card:hover .service-card-title {
+      color: var(--color-primary-glow);
+    }
+
+    .service-card-description {
+      font-size: 0.88rem;
+      color: var(--color-text-gray);
+      line-height: 1.6;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.4s ease;
+    }
+
+    .service-card:hover .service-card-description {
+      max-height: 120px;
+      opacity: 1;
+    }
+
+    .service-card-line {
+      width: 40px;
+      height: 3px;
+      background: var(--color-primary-glow);
+      margin-top: 16px;
+      transition: width var(--transition-smooth);
+    }
+
+    .service-card:hover .service-card-line {
+      width: 70px;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      padding: 60px 0 30px;
+      background: #050505;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-logo span {
+      color: var(--color-primary-glow);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-gray);
+      transition: border-color var(--transition-smooth), color var(--transition-smooth), transform 0.2s;
+    }
+
+    .footer-socials a:hover {
+      border-color: var(--color-primary-glow);
+      color: var(--color-primary-glow);
+      transform: translateY(-3px);
+    }
+
+    .footer-socials svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+
+    /* ===== Cascade delay for service cards ===== */
+    .service-card:nth-child(1) { --cascade-delay: 0ms; }
+    .service-card:nth-child(2) { --cascade-delay: 150ms; }
+    .service-card:nth-child(3) { --cascade-delay: 300ms; }
+
+    .testimonial-card:nth-child(1) { --cascade-delay: 0ms; }
+    .testimonial-card:nth-child(2) { --cascade-delay: 150ms; }
+    .testimonial-card:nth-child(3) { --cascade-delay: 300ms; }
+
+    .pack-card:nth-child(1) { --cascade-delay: 0ms; }
+    .pack-card:nth-child(2) { --cascade-delay: 150ms; }
+    .pack-card:nth-child(3) { --cascade-delay: 300ms; }
+
+    .reveal-fallback {
+      transition-delay: var(--cascade-delay, 0ms);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .testimonials-grid,
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(10, 10, 10, 0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 24px;
+        gap: 18px;
+        border-top: 1px solid var(--color-border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .hero-title {
+        font-size: clamp(2.2rem, 10vw, 3.8rem);
+      }
+
+      .testimonials-grid,
+      .services-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .service-card {
+        aspect-ratio: 16 / 10;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .section-title {
+        margin-bottom: 40px;
+      }
+    }
+    /* ===== SECTION: PACKS ===== */
+    .packs-section {
+      padding: 120px 0;
+      background: var(--color-bg-dark);
+      position: relative;
+    }
+
+    .packs-banner {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+      min-height: 250px;
+      align-items: center;
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+      margin-bottom: 40px;
+    }
+
+    .packs-banner:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(10, 31, 18, 0.4);
+      border-color: var(--color-primary-light);
+    }
+
+    .packs-banner-content {
+      padding: 40px 50px;
+      flex: 1;
+      z-index: 2;
+      position: relative;
+    }
+
+    .packs-tag {
+      display: inline-block;
+      background: var(--color-primary-glow);
+      color: var(--color-text-white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .packs-banner-title {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--color-text-white);
+    }
+
+    .packs-banner-image {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: 1;
+    }
+
+    .packs-banner-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--color-bg-card) 0%, transparent 100%);
+      z-index: 1;
+    }
+
+    .packs-banner-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+
+    .packs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pack-card {
+      background: var(--color-bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      position: relative;
+      aspect-ratio: 4 / 5;
+      cursor: pointer;
+      transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .pack-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--color-primary-light);
+      box-shadow: 0 20px 40px rgba(10, 31, 18, 0.4);
+    }
+
+    .pack-card-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .pack-card-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--transition-smooth);
+    }
+
+    .pack-card:hover .pack-card-bg img {
+      transform: scale(1.05);
+    }
+
+    .pack-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    }
+
+    .pack-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px 24px;
+      z-index: 2;
+    }
+
+    .pack-card-tag {
+      display: inline-block;
+      background: var(--color-primary-glow);
+      color: var(--color-text-white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .pack-card-title {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      color: var(--color-text-white);
+    }
+
+    .pack-card-desc {
+      font-size: 1rem;
+      color: var(--color-text-gray);
+      font-weight: 600;
+    }
+
+    @media (max-width: 1024px) {
+      .packs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .packs-banner {
+        flex-direction: column-reverse;
+      }
+      .packs-banner-image {
+        position: relative;
+        width: 100%;
+        height: 250px;
+      }
+      .packs-banner-image::before {
+        background: linear-gradient(to top, var(--color-bg-card) 0%, transparent 100%);
+      }
+      .packs-banner-content {
+        padding: 30px 20px;
+      }
+      .packs-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+    }
+
+    /* ===== WhatsApp Floating Widget ===== */
+    .wa-widget {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .wa-popup {
+      position: absolute;
+      bottom: 75px;
+      right: 0;
+      width: 320px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+      padding: 16px;
+      transform-origin: bottom right;
+      transform: scale(0);
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+      visibility: hidden;
+    }
+
+    .wa-popup.active {
+      transform: scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* The little triangle pointing down */
+    .wa-popup::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: 20px; /* Aligned with the button */
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid #ffffff;
+    }
+
+    .wa-popup-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: #999;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+
+    .wa-popup-close:hover {
+      color: #333;
+    }
+
+    .wa-popup-content {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .wa-popup-profile {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .wa-popup-profile img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .wa-popup-status {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 14px;
+      height: 14px;
+      background: #44c052;
+      border: 2px solid #fff;
+      border-radius: 50%;
+    }
+
+    .wa-popup-text {
+      flex-grow: 1;
+      padding-right: 16px;
+    }
+
+    .wa-popup-text h4 {
+      margin: 0;
+      font-size: 15px;
+      color: #111;
+      font-weight: 700;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .wa-popup-text p.subtitle {
+      margin: 2px 0 6px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .wa-popup-text p.message {
+      margin: 0;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .wa-btn {
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      position: relative;
+      transition: transform 0.2s;
+      margin-left: auto;
+    }
+
+    .wa-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .wa-btn svg {
+      width: 36px;
+      height: 36px;
+      fill: #fff;
+    }
+
+    .wa-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #ff0000;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <a href="#" class="nav-logo">El <span>Método</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== SECTION 1: HERO ===== -->
+  <section class="hero" id="inicio">
+    <!-- Background with parallax -->
+    <div class="hero-bg-parallax" id="heroBg">
+      <!-- Placeholder with CSS gradient simulating gym atmosphere -->
+      <img
+        src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80"
+        alt="Gimnasio profesional con iluminación dramática"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-overlay-bottom"></div>
+
+    <div class="hero-content">
+      <span class="hero-eyebrow">Coach Personal • Nutrición Deportiva</span>
+      <h1 class="hero-title">
+        ENTRENAR CON<br>
+        <em>OLIVERIO SCASSO</em>
+      </h1>
+      <p class="hero-subtitle">
+        Planes de entrenamiento y nutrición personalizados para transformar tu cuerpo y alcanzar tu máximo potencial.
+      </p>
+      <a href="#planes" class="hero-cta">
+        Conocer Planes
+        <span class="hero-cta-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: PACKS DE ENTRENAMIENTO ===== -->
+  <section class="packs-section" id="planes">
+    <div class="container">
+      
+      <!-- Encabezado / Banner -->
+      <div class="packs-banner reveal reveal-fallback">
+        <div class="packs-banner-content">
+          <span class="packs-tag">DESTACADO</span>
+          <h2 class="packs-banner-title">PACKS DE<br>ENTRENAMIENTO</h2>
+        </div>
+        <div class="packs-banner-image">
+          <img src="pack_portada.jpg" alt="Packs de entrenamiento Oliverio Scasso" loading="lazy">
+        </div>
+      </div>
+
+      <!-- Grid de 3 Planes -->
+      <div class="packs-grid">
+        <!-- Plan 1 -->
+        <!-- Plan 1 -->
+        <a href="https://wa.me/5492364362152?text=Hola,%20me%20interesa%20el%20M%C3%A9todo%20Start" target="_blank" rel="noopener noreferrer" class="pack-card reveal reveal-fallback">
+          <div class="pack-card-bg">
+            <img src="plan1.jpg" alt="Método start" loading="lazy">
+            <div class="pack-card-overlay"></div>
+          </div>
+          <div class="pack-card-content">
+            <span class="pack-card-tag">OLIVERIO SCASSO</span>
+            <h3 class="pack-card-title">Método start</h3>
+            <p class="pack-card-desc">Construí tu base</p>
+          </div>
+        </a>
+
+        <!-- Plan 2 -->
+        <a href="https://wa.me/5492364362152?text=Hola,%20me%20interesa%20el%20M%C3%A9todo%20Progress" target="_blank" rel="noopener noreferrer" class="pack-card reveal reveal-fallback">
+          <div class="pack-card-bg">
+            <img src="plan2.jpg" alt="Método progress" loading="lazy">
+            <div class="pack-card-overlay"></div>
+          </div>
+          <div class="pack-card-content">
+            <span class="pack-card-tag">OLIVERIO SCASSO</span>
+            <h3 class="pack-card-title">Método progress</h3>
+            <p class="pack-card-desc">Supera tu nivel</p>
+          </div>
+        </a>
+
+        <!-- Plan 3 -->
+        <a href="https://wa.me/5492364362152?text=Hola,%20me%20interesa%20el%20M%C3%A9todo%20Elite" target="_blank" rel="noopener noreferrer" class="pack-card reveal reveal-fallback">
+          <div class="pack-card-bg">
+            <img src="plan3.jpg" alt="Método elite" loading="lazy">
+            <div class="pack-card-overlay"></div>
+          </div>
+          <div class="pack-card-content">
+            <span class="pack-card-tag">OLIVERIO SCASSO</span>
+            <h3 class="pack-card-title">Método elite</h3>
+            <p class="pack-card-desc">Entrena conmigo</p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: TESTIMONIALS ===== -->
+  <section class="testimonials" id="testimonios">
+    <div class="container">
+      <h2 class="section-title reveal reveal-fallback">COMENTARIOS DE MIS <span>CLIENTES</span></h2>
+
+      <div class="testimonials-grid">
+        <!-- Card 1 -->
+        <div class="testimonial-card reveal reveal-fallback">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="testimonial-quote-icon">"</div>
+          <p class="testimonial-text">
+            En solo 3 meses logré una transformación increíble. Las rutinas están perfectamente adaptadas a mis objetivos y el seguimiento constante marca la diferencia. 100% recomendado.
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MR</div>
+            <div class="testimonial-author-info">
+              <h4>Martín R.</h4>
+              <p>Transformación Corporal</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="testimonial-card reveal reveal-fallback">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="testimonial-quote-icon">"</div>
+          <p class="testimonial-text">
+            La dieta que me armó Oliverio fue un antes y un después. Nunca pensé que podía comer tan bien y al mismo tiempo lograr mis objetivos de composición corporal. Un crack.
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">LC</div>
+            <div class="testimonial-author-info">
+              <h4>Lucía C.</h4>
+              <p>Plan Nutricional</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="testimonial-card reveal reveal-fallback">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="testimonial-quote-icon">"</div>
+          <p class="testimonial-text">
+            El seguimiento 1 a 1 es lo que más valoro. Siempre disponible para ajustar la rutina, responder dudas y motivarte cuando más lo necesitás. Profesionalismo total.
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">FG</div>
+            <div class="testimonial-author-info">
+              <h4>Federico G.</h4>
+              <p>Seguimiento Personalizado</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: SERVICES ===== -->
+  <section class="services" id="servicios">
+    <div class="container">
+      <h2 class="section-title reveal reveal-fallback">MIS <span>SERVICIOS</span></h2>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card reveal reveal-fallback">
+          <div class="service-card-bg">
+            <img
+              src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&q=80"
+              alt="Entrenamiento con pesas"
+              loading="lazy"
+            >
+          </div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <div class="service-card-number">01</div>
+            <h3 class="service-card-title">Rutinas de Entrenamientos</h3>
+            <p class="service-card-description">
+              Programas de entrenamiento diseñados según tus objetivos, nivel y disponibilidad. Periodización inteligente para resultados reales.
+            </p>
+            <div class="service-card-line"></div>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card reveal reveal-fallback">
+          <div class="service-card-bg">
+            <img
+              src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80"
+              alt="Alimentación saludable y dietas"
+              loading="lazy"
+            >
+          </div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <div class="service-card-number">02</div>
+            <h3 class="service-card-title">Dietas</h3>
+            <p class="service-card-description">
+              Planes nutricionales adaptados a tu metabolismo, gustos y rutina diaria. Sin restricciones extremas, con resultados sostenibles.
+            </p>
+            <div class="service-card-line"></div>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card reveal reveal-fallback">
+          <div class="service-card-bg">
+            <img
+              src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80"
+              alt="Seguimiento personalizado uno a uno"
+              loading="lazy"
+            >
+          </div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <div class="service-card-number">03</div>
+            <h3 class="service-card-title">Seguimiento 1 a 1</h3>
+            <p class="service-card-description">
+              Acompañamiento constante con ajustes semanales, check-ins y soporte directo para asegurar tu progreso continuo.
+            </p>
+            <div class="service-card-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="contacto">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">El <span>Método</span></div>
+        <div class="footer-socials">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/oli.scasso/?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <!-- WhatsApp -->
+          <a href="https://wa.me/5492364362152" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <!-- Email -->
+          <a href="#" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+        <p class="footer-copy">© 2026 Oliverio Scasso. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== WHATSAPP WIDGET ===== -->
+  <div class="wa-widget" id="waWidget">
+    <div class="wa-popup" id="waPopup">
+      <button class="wa-popup-close" id="waClose" aria-label="Cerrar">✕</button>
+      <a href="https://wa.me/5492364362152" target="_blank" rel="noopener noreferrer" class="wa-popup-content">
+        <div class="wa-popup-profile">
+          <img src="avatar.png" alt="Oliverio Scasso">
+          <div class="wa-popup-status"></div>
+        </div>
+        <div class="wa-popup-text">
+          <h4>Oliverio Scasso</h4>
+          <p class="subtitle">Propietario de la empresa</p>
+          <p class="message">👋 ¡Hola! Déjanos tu consulta y te respondemos a la brevedad</p>
+        </div>
+      </a>
+    </div>
+    
+    <button class="wa-btn" id="waToggle" aria-label="Abrir WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span class="wa-badge"></span>
+    </button>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // ===== Nav scroll effect =====
+    const nav = document.getElementById('nav');
+    const handleNavScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    };
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    handleNavScroll();
+
+    // ===== Mobile menu toggle =====
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    // Close menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('active'));
+    });
+
+    // ===== Parallax effect on hero background =====
+    const heroBg = document.getElementById('heroBg');
+    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            const heroHeight = window.innerHeight;
+            if (scrollY < heroHeight * 1.5) {
+              heroBg.style.transform = `translateY(${scrollY * 0.35}px)`;
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+
+    // ===== Scroll reveal fallback with IntersectionObserver =====
+    if (!CSS.supports('(animation-timeline: view()) and (animation-range: entry)')) {
+      const revealElements = document.querySelectorAll('.reveal-fallback');
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+          rootMargin: '0px 0px -50px 0px',
+        }
+      );
+      revealElements.forEach(el => revealObserver.observe(el));
+    } else {
+      // Native scroll-driven animations are in use; make fallback class inert
+      document.querySelectorAll('.reveal-fallback').forEach(el => {
+        el.classList.remove('reveal-fallback');
+      });
+    }
+    // ===== WhatsApp Widget Toggle =====
+    const waToggle = document.getElementById('waToggle');
+    const waPopup = document.getElementById('waPopup');
+    const waClose = document.getElementById('waClose');
+
+    // Show popup automatically after 3 seconds
+    setTimeout(() => {
+      if (!waPopup.classList.contains('closed-by-user')) {
+        waPopup.classList.add('active');
+      }
+    }, 3000);
+
+    waToggle.addEventListener('click', () => {
+      waPopup.classList.toggle('active');
+    });
+
+    waClose.addEventListener('click', () => {
+      waPopup.classList.remove('active');
+      waPopup.classList.add('closed-by-user');
+    });
+  </script>
+
+</body>
+</html>
